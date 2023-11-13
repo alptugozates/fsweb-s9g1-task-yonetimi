@@ -71,7 +71,7 @@ export default function TaskHookForm({ kisiler, submitFn }) {
                   required: "Lütfen bir kişi seçiniz.",
                   validate: {
                     altsinir: (secimler) =>
-                      secimler.length <= 3 || "En fazla 3 kişi seçebilirsiniz.",
+                      secimler.length <= 3 || "En fazla 3 kişi seçebilirsiniz."
                   },
                 })}
               />
