@@ -68,7 +68,7 @@ export default function TaskHookForm({ kisiler, submitFn }) {
                 type="checkbox"
                 value={p}
                 {...register("people", {
-                  required: "Lütfen bir kisi seciniz.",
+                  required: "Lütfen bir kişi seçiniz.",
                   validate: {
                     altsinir: (secimler) =>
                       secimler.length <= 3 || "En fazla 3 kişi seçebilirsiniz.",
