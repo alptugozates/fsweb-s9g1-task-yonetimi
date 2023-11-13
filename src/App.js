@@ -1,27 +1,41 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./app.css";
 import Task from "./Task";
 import TaskForm from "./TaskForm";
 import TaskHookForm from "./TaskHookForm";
 import PeopleForm from "./PeopleForm";
 import { initialTasks, initialTeam } from "./data";
+import { ToastContainer, Zoom, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 function App() {
   const [tasks, setTasks] = useState(initialTasks);
   const [team, setTeam] = useState(initialTeam);
 
+  const notify = (deger) => toast.success(deger);
+
   function handleTaskSubmit(yeniTask) {
     setTasks([yeniTask, ...tasks])
+    notify(`${yeniTask.title} adlı görev eklenmiştir.`)
   }
 
   function handlePeopleSubmit(yeniKisi) {
     setTeam([...team, yeniKisi])
+    notify(`${yeniKisi} adlı kişi eklendi`);
   }
 
   function handleComplete(id) {
-    console.log("tamamlama fonksiyonunu buraya yazın")
+    const newArray = [...tasks];
+    const completedTaskList = newArray.find((item) => item.id === id);
+    completedTaskList.status = "yapıldı!";
+    setTasks(newArray);
+    notify("Görev tamamlandı!");
   }
+
+  useEffect(() => {
+    notify("Sayfa başarıyla yüklenmiştir.")
+  }, [])
 
   return (
     <div className="app">
@@ -36,6 +50,7 @@ function App() {
           <h2>Yeni Kişi</h2>
           <PeopleForm kisiler={team} submitFn={handlePeopleSubmit} />
         </div>
+        <ToastContainer position="bottom-left" theme="colored" transition={Zoom} />
       </div>
       <div className="columns">
         <div className="column">
