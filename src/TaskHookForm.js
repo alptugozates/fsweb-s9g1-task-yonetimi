@@ -11,11 +11,13 @@ export default function TaskHookForm({ kisiler, submitFn }) {
       id: nanoid(5),
       status: "yapılacak",
     });
+    reset()
   };
 
   const {
     register,
     handleSubmit,
+    reset,
     formState: { isValid, errors },
   } = useForm({
     mode: "onBlur",
